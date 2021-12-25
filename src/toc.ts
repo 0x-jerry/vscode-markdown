@@ -1,6 +1,6 @@
 'use strict';
 
-import * as path from 'path';
+import path from 'path-browserify';
 import * as stringSimilarity from 'string-similarity';
 import { CancellationToken, CodeLens, CodeLensProvider, commands, EndOfLine, ExtensionContext, languages, Position, Range, TextDocument, TextDocumentWillSaveEvent, TextEditor, Uri, window, workspace, WorkspaceEdit } from 'vscode';
 import { commonMarkEngine, mdEngine, Token } from './markdownEngine';

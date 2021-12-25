@@ -8,11 +8,18 @@ const katexOptions: KatexOptions = { throwOnError: false };
  * https://code.visualstudio.com/api/extension-guides/markdown-extension#adding-support-for-new-syntax-with-markdownit-plugins
  */
 export function extendMarkdownIt(md: MarkdownIt): MarkdownIt {
-    md.use(require("markdown-it-task-lists"));
+    extendsMd(md)
+
+    return md;
+}
+
+async function extendsMd(md: MarkdownIt) {
+    md.use((await import("markdown-it-task-lists")).default);
 
     if (configManager.get("math.enabled")) {
         // We need side effects. (#521)
-        require("katex/contrib/mhchem");
+        // @ts-ignore
+        await import("katex/contrib/mhchem");
 
         // Deep copy, as KaTeX needs a normal mutable object. <https://katex.org/docs/options.html>
         const macros: KatexOptions["macros"] = JSON.parse(JSON.stringify(configManager.get("katex.macros")));
@@ -23,8 +30,6 @@ export function extendMarkdownIt(md: MarkdownIt): MarkdownIt {
             katexOptions["macros"] = macros;
         }
 
-        md.use(require("@neilsustc/markdown-it-katex"), katexOptions);
+        md.use((await import("@neilsustc/markdown-it-katex")).default, katexOptions);
     }
-
-    return md;
 }

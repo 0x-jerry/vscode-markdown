@@ -7,14 +7,16 @@
   "configurations": [
     {
       "name": "Extension",
-      "type": "extensionHost",
+      "type": "pwa-extensionHost",
       "request": "launch",
+      "debugWebWorkerHost": true,
       "runtimeExecutable": "${execPath}",
       "args": [
+        "--disable-extensions",
         "--extensionDevelopmentPath=${workspaceFolder}",
         "--extensionDevelopmentKind=web"
       ],
-      "outFiles": ["${workspaceFolder}/dist/*.js"],
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"],
       "preLaunchTask": "npm: compile"
     },
     {

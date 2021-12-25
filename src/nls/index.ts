@@ -135,17 +135,7 @@ export const localize: IFuncLocalize = function (key: string, ...args: Primitive
  * You should only call it **once** in the application entry point.
  */
 export function config(opts: IConfigOption) {
-    if (opts.locale) {
-        options.locale = opts.locale;
-    } else {
-        try {
-            const vscodeOptions = JSON.parse(process.env.VSCODE_NLS_CONFIG as string) as IVscodeNlsConfig;
-            options.locale = vscodeOptions.locale as any;
-        } catch (error) {
-            // Log, but do nothing else, in case VS Code suddenly changes their mind, or we are not in VS Code.
-            console.error(error);
-        }
-    }
+    options.locale = opts.locale || VisualStudioCodeLocaleId.English
 
     options.extensionPath = opts.extensionContext.extensionPath;
     options.cacheResolution = opts.extensionContext.extensionMode !== vscode.ExtensionMode.Development;

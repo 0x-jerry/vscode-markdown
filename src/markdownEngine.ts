@@ -1,7 +1,7 @@
 //// <https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/src/markdownEngine.ts>
 
 import * as vscode from "vscode";
-import MarkdownIt  from "markdown-it";
+import MarkdownIt  from "markdown-it/dist/markdown-it.js";
 import Token from "markdown-it/lib/token";
 import LanguageIdentifier from "./contract/LanguageIdentifier";
 import type IDisposable from "./IDisposable";
