@@ -3,7 +3,7 @@
 // import * as fs from 'fs';
 // import sizeOf from 'image-size';
 import * as path from 'path-browserify';
-import { CancellationToken, CompletionContext, CompletionItem, CompletionItemKind, CompletionItemProvider, CompletionList, ExtensionContext, languages, MarkdownString, Position, ProviderResult, Range, SnippetString, TextDocument, workspace } from 'vscode';
+import { CancellationToken, CompletionContext, CompletionItem, CompletionItemKind, CompletionItemProvider, CompletionList, ExtensionContext, languages, MarkdownString, Position, ProviderResult, Range, SnippetString, TextDocument, Uri, workspace } from 'vscode';
 import { getAllTocEntry, IHeading } from './toc';
 import { mathEnvCheck } from "./util/contextCheck";
 import { Document_Selector_Markdown } from './util/generic';
@@ -463,7 +463,7 @@ class MdCompletionItemProvider implements CompletionItemProvider {
                 //// `<img src="dir_here|">`
                 typedDir = lineTextBefore.substr(lineTextBefore.lastIndexOf('="') + 2);
             }
-            const basePath = getBasepath(document, typedDir);
+            const basePath = await getBasepath(document, typedDir);
             const isRootedPath = typedDir.startsWith('/');
 
             return workspace.findFiles('**/*.{png,jpg,jpeg,svg,gif,webp}', this.EXCLUDE_GLOB).then(uris => {
@@ -471,16 +471,8 @@ class MdCompletionItemProvider implements CompletionItemProvider {
                     const label = path.relative(basePath, imgUri.fsPath).replace(/\\/g, '/');
                     let item = new CompletionItem(label.replace(/ /g, '%20'), CompletionItemKind.File);
 
-                    // Add image preview
-                    let dimensions: { width: number; height: number; };
-                    try {
-                        // dimensions = sizeOf(imgUri.fsPath);
-                        // todo
-                        throw new Error('Do not support calculate size.')
-                    } catch (error) {
-                        console.error(error);
-                        return item;
-                    }
+                    // Use fixed size instead of calculate it.
+                    const dimensions = { width: 318, height: 200 };
 
                     const maxWidth = 318;
                     if (dimensions.width > maxWidth) {
@@ -676,7 +668,7 @@ class MdCompletionItemProvider implements CompletionItemProvider {
             if (workspace.getWorkspaceFolder(document.uri) === undefined) return [];
 
             const typedDir = lineTextBefore.match(/(?<=((?:\]\()|(?:\]\:))[ \t\f\v]*)\S*$/)[0];
-            const basePath = getBasepath(document, typedDir);
+            const basePath = await getBasepath(document, typedDir);
             const isRootedPath = typedDir.startsWith('/');
 
             return workspace.findFiles('**/*', this.EXCLUDE_GLOB).then(uris => {
@@ -703,23 +695,25 @@ class MdCompletionItemProvider implements CompletionItemProvider {
  * @param doc
  * @param dir The dir already typed in the src field, e.g. `[alt text](dir_here|)`
  */
-function getBasepath(doc: TextDocument, dir: string): string {
+async function getBasepath(doc: TextDocument, dir: string): Promise<string> {
     if (dir.includes('/')) {
         dir = dir.substr(0, dir.lastIndexOf('/') + 1);
     } else {
         dir = '';
     }
 
-    let root = workspace.getWorkspaceFolder(doc.uri).uri.fsPath;
+    let rootUri = workspace.getWorkspaceFolder(doc.uri).uri;
+    let root = rootUri.fsPath;
     const rootFolder = workspace.getConfiguration('markdown.extension.completion', doc.uri).get<string>('root', '');
 
-    // todo: test
-    // if (rootFolder.length > 0 && fs.existsSync(path.join(root, rootFolder))) {
-    //     root = path.join(root, rootFolder);
-    // }
-
-    if (rootFolder.length > 0) {
-        root = path.join(root, rootFolder);
+    try {
+        // check path exist
+        await workspace.fs.stat(Uri.joinPath(rootUri, rootFolder))
+        if (rootFolder.length > 0) {
+            root = path.join(root, rootFolder);
+        }
+    } catch (_error) {
+        // ignore
     }
 
     const basePath = path.join(

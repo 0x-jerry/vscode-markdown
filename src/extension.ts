@@ -6,10 +6,9 @@ import { decorationManager } from "./theming/decorationManager";
 import * as completion from './completion';
 import * as formatting from './formatting';
 import * as listEditing from './listEditing';
-import { commonMarkEngine, MarkdownIt, mdEngine } from "./markdownEngine";
+import { commonMarkEngine, mdEngine } from "./markdownEngine";
 import { extendMarkdownIt } from "./markdown-it-plugin-provider";
 import { config as configNls, localize } from './nls';
-import resolveResource from "./nls/resolveResource";
 import * as preview from './preview';
 import * as print from './print';
 import * as decorations from './syntaxDecorations';
@@ -19,12 +18,7 @@ import * as toc from './toc';
 export function activate(context: ExtensionContext) {
     configNls({ extensionContext: context });
 
-    context.subscriptions.push(
-        configManager, 
-        decorationManager, 
-        commonMarkEngine, 
-        mdEngine
-    );
+    context.subscriptions.push(configManager, decorationManager, commonMarkEngine, mdEngine);
 
     activateMdExt(context);
 
@@ -54,7 +48,7 @@ function activateMdExt(context: ExtensionContext) {
         wordPattern: /(-?\d*\.\d\w*)|([^\!\@\#\%\^\&\(\)\-\=\+\[\{\]\}\\\|\;\:\'\"\,\.\<\>\/\?\s\，\。\《\》\？\；\：\‘\“\’\”\（\）\【\】\、]+)/g
     });
 
-    showWelcome(context);
+    // showWelcome(context);
 }
 
 /**
@@ -80,7 +74,7 @@ async function showWelcome(context: ExtensionContext): Promise<void> {
         // Confirm the message is valid.
         // `locale` should be a string. But here we keep it `any` to suppress type checking.
 
-        // todo
+        // todo, need a solution.
         // const locale: any = JSON.parse(process.env.VSCODE_NLS_CONFIG as string).locale;
         // const welcomeMessageFileUri = Uri.file(resolveResource(welcomeDirUri.fsPath, "", ".txt", [locale, "en"], "")![0]);
         // const msgWelcome = Buffer.from(await workspace.fs.readFile(welcomeMessageFileUri)).toString("utf8");

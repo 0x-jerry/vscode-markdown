@@ -6,6 +6,7 @@ specifiers:
   '@types/katex': ^0.11.1
   '@types/markdown-it': ^12.2.3
   '@types/mocha': ^9.0.0
+  '@types/path-browserify': ^1.0.0
   '@types/string-similarity': ^4.0.0
   '@types/vscode': ~1.49.0
   '@vscode/test-electron': ^1.6.2
@@ -29,6 +30,7 @@ devDependencies:
   '@types/katex': registry.npmmirror.com/@types/katex/0.11.1
   '@types/markdown-it': registry.npmmirror.com/@types/markdown-it/12.2.3
   '@types/mocha': registry.npmmirror.com/@types/mocha/9.0.0
+  '@types/path-browserify': registry.npmmirror.com/@types/path-browserify/1.0.0
   '@types/string-similarity': registry.npmmirror.com/@types/string-similarity/4.0.0
   '@types/vscode': registry.npmmirror.com/@types/vscode/1.49.0
   '@vscode/test-electron': registry.npmmirror.com/@vscode/test-electron/1.6.2
@@ -1054,6 +1056,12 @@ packages:
     resolution: {integrity: sha512-i5y7HTbvhonZQE+GnUM2rz1Bi8QkzxdQmEv1LKOv4nWyaQk/gdeiTApuQR3PDJHX7WomAbpx2wlWSEpxXGZ/UQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/node/download/@types/node-12.12.70.tgz}
     name: '@types/node'
     version: 12.12.70
+    dev: true
+
+  registry.npmmirror.com/@types/path-browserify/1.0.0:
+    resolution: {integrity: sha1-KU7G6ItrDTQKOJe3Eg5bOT8WaQ4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/path-browserify/download/@types/path-browserify-1.0.0.tgz}
+    name: '@types/path-browserify'
+    version: 1.0.0
     dev: true
 
   registry.npmmirror.com/@types/string-similarity/4.0.0:
