@@ -1,7 +1,7 @@
 'use strict';
 
 import * as fs from "fs";
-import * as path from 'path';
+import * as path from 'path-browserify';
 import { commands, ExtensionContext, TextDocument, Uri, window, workspace } from 'vscode';
 import { encodeHTML } from 'entities';
 import { localize } from './nls';
@@ -10,6 +10,7 @@ import { isMdEditor } from "./util/generic";
 
 let thisContext: ExtensionContext;
 
+// todo: remove fs module. Open an save dialog instead of save directly.
 export function activate(context: ExtensionContext) {
     thisContext = context;
     context.subscriptions.push(

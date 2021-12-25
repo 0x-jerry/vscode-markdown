@@ -41,7 +41,7 @@ function activateMdExt(context: ExtensionContext) {
     // Syntax decorations
     decorations.activate(context);
     // Images paths and math commands completions
-    // completion.activate(context);
+    completion.activate(context);
     // Print to PDF
     // print.activate(context);
     // Table formatter

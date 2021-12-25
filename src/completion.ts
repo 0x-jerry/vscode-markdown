@@ -1,8 +1,8 @@
 'use strict'
 
-import * as fs from 'fs';
-import sizeOf from 'image-size';
-import * as path from 'path';
+// import * as fs from 'fs';
+// import sizeOf from 'image-size';
+import * as path from 'path-browserify';
 import { CancellationToken, CompletionContext, CompletionItem, CompletionItemKind, CompletionItemProvider, CompletionList, ExtensionContext, languages, MarkdownString, Position, ProviderResult, Range, SnippetString, TextDocument, workspace } from 'vscode';
 import { getAllTocEntry, IHeading } from './toc';
 import { mathEnvCheck } from "./util/contextCheck";
@@ -471,14 +471,17 @@ class MdCompletionItemProvider implements CompletionItemProvider {
                     const label = path.relative(basePath, imgUri.fsPath).replace(/\\/g, '/');
                     let item = new CompletionItem(label.replace(/ /g, '%20'), CompletionItemKind.File);
 
-                    //// Add image preview
+                    // Add image preview
                     let dimensions: { width: number; height: number; };
                     try {
-                        dimensions = sizeOf(imgUri.fsPath);
+                        // dimensions = sizeOf(imgUri.fsPath);
+                        // todo
+                        throw new Error('Do not support calculate size.')
                     } catch (error) {
                         console.error(error);
                         return item;
                     }
+
                     const maxWidth = 318;
                     if (dimensions.width > maxWidth) {
                         dimensions.height = Number(dimensions.height * maxWidth / dimensions.width);
@@ -709,7 +712,13 @@ function getBasepath(doc: TextDocument, dir: string): string {
 
     let root = workspace.getWorkspaceFolder(doc.uri).uri.fsPath;
     const rootFolder = workspace.getConfiguration('markdown.extension.completion', doc.uri).get<string>('root', '');
-    if (rootFolder.length > 0 && fs.existsSync(path.join(root, rootFolder))) {
+
+    // todo: test
+    // if (rootFolder.length > 0 && fs.existsSync(path.join(root, rootFolder))) {
+    //     root = path.join(root, rootFolder);
+    // }
+
+    if (rootFolder.length > 0) {
         root = path.join(root, rootFolder);
     }
 
