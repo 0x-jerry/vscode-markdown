@@ -4,7 +4,7 @@
     "description": "%ext.description%",
     "icon": "images/Markdown-mark.png",
     "version": "3.5.0",
-    "publisher": "yzhang",
+    "publisher": "fantasy",
     "engines": {
         "vscode": "^1.49.0"
     },
