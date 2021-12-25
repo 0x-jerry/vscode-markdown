@@ -1,8 +1,8 @@
 //// <https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/src/markdownEngine.ts>
 
 import * as vscode from "vscode";
-import MarkdownIt = require("markdown-it");
-import Token = require("markdown-it/lib/token");
+import MarkdownIt  from "markdown-it";
+import Token from "markdown-it/lib/token";
 import LanguageIdentifier from "./contract/LanguageIdentifier";
 import type IDisposable from "./IDisposable";
 import { slugify } from "./util/slugify";
@@ -207,7 +207,7 @@ class MarkdownEngine implements IDynamicMarkdownEngine {
     private async newEngine() {
         let md: MarkdownIt;
 
-        const hljs: typeof import("highlight.js").default = require("highlight.js");
+        const hljs = (await import("highlight.js")).default;
 
         md = new MarkdownIt({
             html: true,

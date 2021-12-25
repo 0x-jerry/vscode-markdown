@@ -4,7 +4,7 @@
 // Thus, we need to check redundantly when loading their contributions, typically in `resolveMarkdownContribution()`.
 
 import * as vscode from "vscode";
-import MarkdownIt = require("markdown-it");
+import MarkdownIt from "markdown-it";
 import { Lazy } from "./util/lazy";
 
 /**

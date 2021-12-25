@@ -1,9 +1,7 @@
 "use strict";
 
-import * as fs from "fs";
 import * as vscode from "vscode";
 import VisualStudioCodeLocaleId from "../contract/VisualStudioCodeLocaleId";
-import resolveResource from "./resolveResource";
 
 export type Primitive = string | number | bigint | boolean | symbol | undefined | null;
 
@@ -56,8 +54,18 @@ interface IVscodeNlsConfig {
 
 //#region Utility
 
-function readJsonFile<T = any>(path: string): T {
-    return JSON.parse(fs.readFileSync(path, "utf8"));
+import zhCn from '../../package.nls.zh-cn.json';
+import en from '../../package.nls.json';
+import ja from '../../package.nls.ja.json';
+
+function getLocalize<T = any>(path: VisualStudioCodeLocaleId): T {
+    const localizationMap: Partial<Record<VisualStudioCodeLocaleId,any>> = {
+        'zh-cn': zhCn,
+        en,
+        ja
+    }
+
+    return localizationMap[path] || {}
 }
 
 //#endregion Utility
@@ -85,15 +93,8 @@ function cacheBundle(locales: VisualStudioCodeLocaleId[] = []): void {
         locales.push(options.locale); // Fallback.
     }
 
-    // * We always provide `package.nls.json`.
-    // * Reverse the return value, so that we can build a bundle with nice fallback by a simple loop.
-    const files = resolveResource(options.extensionPath, "package.nls", "json", locales)!.reverse() as readonly string[];
-    for (const path of files) {
-        try {
-            Object.assign<typeof resolvedBundle, typeof resolvedBundle>(resolvedBundle, readJsonFile<INlsBundle>(path));
-        } catch (error) {
-            console.error(error); // Log, and ignore the bundle.
-        }
+    for (const local of locales) {
+        Object.assign<typeof resolvedBundle, typeof resolvedBundle>(resolvedBundle, getLocalize<INlsBundle>(local));
     }
 }
 

@@ -7,11 +7,12 @@
     "forceConsistentCasingInFileNames": true,
     "newLine": "lf",
     "sourceMap": true,
-    "rootDir": "src",
+    "rootDir": ".",
     "strict": true,
     "noImplicitAny": false,
     "strictNullChecks": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", ".vscode-test"]
 }

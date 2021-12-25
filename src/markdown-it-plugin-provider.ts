@@ -1,5 +1,5 @@
 import type { KatexOptions } from "katex";
-import MarkdownIt = require("markdown-it");
+import type MarkdownIt from "markdown-it"
 import { configManager } from "./configuration/manager";
 
 const katexOptions: KatexOptions = { throwOnError: false };

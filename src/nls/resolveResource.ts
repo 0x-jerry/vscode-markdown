@@ -29,6 +29,7 @@ import type VisualStudioCodeLocaleId from "../contract/VisualStudioCodeLocaleId"
  * @param locales The locale IDs that can be inserted between `baseName` and `suffix`. Sorted by priority, from high to low.
  * @param separator The string to use when joining `baseName`, `locale`, `suffix` together. Defaults to `.` (U+002E).
  * @returns An array of absolute paths to matched files, sorted by priority, from high to low. Or `undefined` when no match.
+ * @deprecated
  * @example
  * // Entries under directory `/tmp`:
  * // Directory f.nls.zh-cn.json/

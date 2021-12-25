@@ -6,7 +6,7 @@ import { CancellationToken, Disposable, DocumentFormattingEditProvider, EndOfLin
 import { Document_Selector_Markdown } from "./util/generic";
 //// This module can only be referenced with ECMAScript imports/exports by turning on the 'esModuleInterop' flag and referencing its default export.
 // import { GraphemeSplitter } from 'grapheme-splitter';
-import GraphemeSplitter = require('grapheme-splitter');
+import GraphemeSplitter from 'grapheme-splitter';
 
 const splitter = new GraphemeSplitter();
 
