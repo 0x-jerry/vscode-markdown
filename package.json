@@ -1,5 +1,5 @@
 {
-    "name": "markdown-all-in-one",
+    "name": "markdown-all-in-one-for-web",
     "displayName": "%ext.displayName%",
     "description": "%ext.description%",
     "icon": "images/Markdown-mark.png",
@@ -30,6 +30,7 @@
         "workspaceContains:README.md"
     ],
     "browser": "./dist/extension.js",
+    "main": "./dist/extension.js",
     "contributes": {
         "colors": [
             {
@@ -520,6 +521,10 @@
             }
         ]
     },
+    "extensionKind":[
+        "workspace",
+        "ui"
+    ],
     "capabilities": {
         "virtualWorkspaces": {
             "supported": "limited",
@@ -527,7 +532,7 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "node ./tools/prepublish.js",
+        "vscode:prepublish": "yarn compile",
         "compile": "tsup src/extension.ts --sourcemap",
         "watch": "tsup src/extension.ts --sourcemap --watch",
         "test": "tsc -p ./ && node ./out/test/runTest.js",
