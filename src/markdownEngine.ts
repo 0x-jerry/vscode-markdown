@@ -1,16 +1,18 @@
 //// <https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/src/markdownEngine.ts>
 
 import * as vscode from "vscode";
-import MarkdownIt  from "markdown-it/dist/markdown-it.js";
+// use dist entry directly, fix build bundle.
+import MarkdownItInstance  from "markdown-it/dist/markdown-it.js";
 import Token from "markdown-it/lib/token";
 import LanguageIdentifier from "./contract/LanguageIdentifier";
 import type IDisposable from "./IDisposable";
 import { slugify } from "./util/slugify";
 import { getMarkdownContributionProvider } from './markdownExtensions';
 import { extendMarkdownIt } from "./markdown-it-plugin-provider";
+import type MarkdownIt from 'markdown-it'
 
 // To help consumers.
-export type { MarkdownIt, Token };
+export type {  MarkdownIt, Token };
 
 /**
  * Represents the parsing result of a document.
@@ -86,7 +88,7 @@ class CommonMarkEngine implements IStaticMarkdownEngine {
     }
 
     constructor() {
-        this._engine = new MarkdownIt('commonmark');
+        this._engine = new MarkdownItInstance('commonmark');
 
         this._disposables = [
             vscode.workspace.onDidCloseTextDocument(document => {
@@ -209,7 +211,7 @@ class MarkdownEngine implements IDynamicMarkdownEngine {
 
         const hljs = (await import("highlight.js")).default;
 
-        md = new MarkdownIt({
+        md = new MarkdownItInstance({
             html: true,
             highlight: (str: string, lang?: string) => {
                 if (lang && (lang = normalizeHighlightLang(lang)) && hljs.getLanguage(lang)) {
