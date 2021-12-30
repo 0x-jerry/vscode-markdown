@@ -17,11 +17,11 @@
         "markdown"
     ],
     "bugs": {
-        "url": "https://github.com/yzhang-gh/vscode-markdown/issues"
+        "url": "https://github.com/0x-jerry/vscode-markdown/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/yzhang-gh/vscode-markdown"
+        "url": "https://github.com/0x-jerry/vscode-markdown"
     },
     "license": "MIT",
     "activationEvents": [
