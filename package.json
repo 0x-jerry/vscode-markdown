@@ -6,7 +6,7 @@
     "version": "3.5.1",
     "publisher": "fantasy",
     "engines": {
-        "vscode": "^1.49.0"
+        "vscode": "^1.53.0"
     },
     "categories": [
         "Programming Languages",
@@ -399,6 +399,11 @@
                     "type": "boolean",
                     "default": false,
                     "markdownDescription": "%config.tableFormatter.normalizeIndentation.description%"
+                },
+                "markdown.extension.tableFormatter.delimiterRowNoPadding": {
+                    "type": "boolean",
+                    "default": false,
+                    "markdownDescription": "%config.tableFormatter.delimiterRowNoPadding.description%"
                 },
                 "markdown.extension.theming.decoration.renderCodeSpan": {
                     "type": "boolean",
