@@ -1,5 +1,5 @@
 {
-    "ext.displayName": "Markdown All in One",
+    "ext.displayName": "Markdown All in One - Web",
     "ext.description": "All you need to write Markdown (keyboard shortcuts, table of contents, auto preview and more)",
     "command.toc.create.title": "Create Table of Contents",
     "command.toc.update.title": "Update Table of Contents",

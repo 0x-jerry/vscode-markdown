@@ -1,5 +1,5 @@
 {
-    "ext.displayName": "Markdown All in One",
+    "ext.displayName": "Markdown All in One - Web",
     "ext.description": "する事はMarkdownを書くだけでいいのです（キーボードショートカット、目次、自動プレビューなど）",
     "command.toc.create.title": "目次（TOC）の作成",
     "command.toc.update.title": "目次（TOC）の更新",

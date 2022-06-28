@@ -1,5 +1,5 @@
 {
-    "ext.displayName": "Markdown All in One",
+    "ext.displayName": "Markdown All in One - Web",
     "ext.description": "使用 Markdown 所需要的一切（快捷键，目录，自动预览以及更多功能）",
     "command.toc.create.title": "创建目录",
     "command.toc.update.title": "更新目录",
