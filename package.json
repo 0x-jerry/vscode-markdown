@@ -537,7 +537,7 @@
         }
     },
     "scripts": {
-        "vscode:prepublish": "yarn compile",
+        "vscode:prepublish": "npm run compile",
         "compile": "tsup src/extension.ts --sourcemap",
         "watch": "tsup src/extension.ts --sourcemap --watch",
         "test": "tsc -p ./ && node ./out/test/runTest.js",
